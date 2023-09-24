@@ -15,6 +15,7 @@
 *.swp
 *.patch
 *.bin
+*.log
 
 # Build tree
 /build-*
@@ -78,3 +79,9 @@ cscope.*
 
 # spl ais files
 /spl/*.ais
+
+#files
+/config/scripts/lxdialog/lxdialog
+MCradiolists
+MCmenu
+MCdialog.out
