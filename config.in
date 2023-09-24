@@ -1,0 +1,301 @@
+mainmenu_name "U-Boot Configuration"
+
+define_bool CONFIG_MISC_INIT_R y
+define_bool CONFIG_STANDALONE_UBOOT y
+
+mainmenu_option next_comment
+comment 'Board'
+
+if [ "$CONFIG_STANDALONE_UBOOT" = "n" ]; then
+  choice 'Realtek' "RTL838x  CONFIG_RTL838X
+                    RTL839x  CONFIG_RTL839X
+                    RTL8676  CONFIG_RTL8676
+                    RTL8686  CONFIG_RTL8686"  RTL839x
+else
+  choice 'Realtek' "RTL839x  CONFIG_RTL839XS
+                    RTL838x  CONFIG_RTL838XS" RTL839x
+fi
+
+if [ "$CONFIG_RTL8686" = "y" ]; then
+choice 'Console '	"UART0 CONFIG_UART0
+                   UART1 CONFIG_UART1"  UART0
+fi
+
+choice 'Console ' \
+	"UART0 CONFIG_UART0 \
+	 UART1 CONFIG_UART1"  UART0
+
+bool ' EEE function' CONFIG_EEE n
+bool ' EEE Compatible function' CONFIG_EEE_COMPATIBLE n
+
+bool 'Interrupt Support' CONFIG_INTERRUPT_SUPPORT n
+
+if [ "$CONFIG_RTL838X" = "y" ]; then
+	bool "Test Chip" CONFIG_RTL8380_TEST_CHIP
+fi
+
+if [ "$CONFIG_RTL838XS" = "y" ]; then
+	bool "OLT TEST" CONFIG_RTL8380_OLT_TEST
+fi
+
+if [ "$CONFIG_RTL838XS" = "y" ] || [ "$CONFIG_RTL839XS" = "y" ]; then
+	bool "MDC MDIO EXT" CONFIG_MDC_MDIO_EXT_SUPPORT y
+fi
+
+if [ "$CONFIG_RTL839XS" = "y" -a "$CONFIG_INTERRUPT_SUPPORT" = "y" ]; then
+bool 'Software Control LED' CONFIG_SOFTWARE_CONTROL_LED n
+	if [ "$CONFIG_SOFTWARE_CONTROL_LED" = "y" ]; then
+		int ' LED Reflash time (unit:10mS)' CONFIG_SOFTWARE_CONTROL_LED_RATE 5
+	fi
+fi
+endmenu
+
+#############################################################################
+
+mainmenu_option next_comment
+
+comment 'Board Probe'
+
+comment 'RTK Board Selection'
+bool 'Select RTK Board' CONFIG_RTK_BOARD y
+
+if [ "$CONFIG_RTK_BOARD" = "y" -a "$CONFIG_RTL8328" = "y" ]; then
+    bool '  RTL8328M_8212F demo board' CONFIG_RTL8328M_8212F_DEMO y
+    bool '  RTL8328M_8214F demo board' CONFIG_RTL8328M_8214F_DEMO y
+    bool '  RTL8328M_8214FB demo board' CONFIG_RTL8328M_8214FB_DEMO y
+    bool '  RTL8328S_2SFP demo board' CONFIG_RTL8328S_2SFP_DEMO y
+    bool '  RTL8328L_8212B demo board' CONFIG_RTL8328L_8212B_DEMO y
+    bool '  RTL8328L_8212B serial led demo board' CONFIG_RTL8328L_8212B_SERIAL_LED_DEMO y
+				fi
+if [ "$CONFIG_RTK_BOARD" = "y" -a "$CONFIG_RTL839XS" = "y" ]; then
+    bool '  RTL8353M QA board' CONFIG_RTL8353M_QA y
+    bool '  RTL8392M QA board' CONFIG_RTL8392M_QA y
+    bool '  RTL8393M QA board' CONFIG_RTL8393M_QA y
+    bool '  RTL8351M DEMO board' CONFIG_RTL8351M_DEMO y
+    bool '  RTL8353M DEMO board' CONFIG_RTL8353M_DEMO y
+    bool '  RTL8353M 14B DEMO board' CONFIG_RTL8353M_14B_DEMO y
+    bool '  RTL8391M DEMO board' CONFIG_RTL8391M_DEMO y
+    bool '  RTL8392M DEMO board' CONFIG_RTL8392M_DEMO y
+    bool '  RTL8393M DEMO board' CONFIG_RTL8393M_DEMO y
+    bool '  RTL8393M 18D board' CONFIG_RTL8393M_18D y
+    bool '  RTL8396M DEMO board' CONFIG_RTL8396M_DEMO y
+    bool '  RTL8396M 14QF 95R ES DEMO board' CONFIG_RTL8396M_8214QF_8295R_ES_DEMO y
+    bool '  RTL8396M 18B 14QF 95R DEMO board' CONFIG_RTL8396M_8218B_8214QF_8295R_DEMO y
+    bool '  RTL8396M 14QF 95R DEMO board' CONFIG_RTL8396M_8214QF_8295R_DEMO y
+    bool '  RTL8391M 14C DEMO board' CONFIG_RTL8391M_14C_DEMO y
+		bool '	RTL8391M 14QF 14QF 14FC board' CONFIG_RTL8391M_14QF_14QF_14FC_DEMO Y
+    bool '  RTL8393M 14C DEMO board' CONFIG_RTL8393M_14C_DEMO y
+		bool '  RTL8393M 8218B 14QF DEMO board' CONFIG_RTL8393M_8218B_8214QF_DEMO y
+fi
+if [ "$CONFIG_RTK_BOARD" = "y" -a "$CONFIG_RTL838XS" = "y" ]; then
+    bool '  RTL8380 FPGA board' CONFIG_RTL8380_FPGA y
+    bool '  RTL8382M_8218B_INTPHY_8218FB demo board(20G+4G Combo)' CONFIG_RTL8382M_8218B_INTPHY_8218FB_DEMO y
+    bool '  RTL8382M_8218B_INTPHY_8218B_8214FC demo board(24G+4G Combo)' CONFIG_RTL8382M_8218B_INTPHY_8218B_8214FC_DEMO y
+    bool '  RTL8382M_8218B_INTPHY_8218B_8214QF demo board(24G+FX)' CONFIG_RTL8382M_8218B_INTPHY_8218B_8214QF_DEMO y
+    bool '  RTL8382M_8218D_INTPHY_8218D_8214FC demo board(24G+4G Combo)' CONFIG_RTL8382M_8218D_INTPHY_8218D_8214FC_DEMO y
+    bool '  RTL8382M_8218B_INTPHY_8218B_8214B demo board(24G+4G Combo)' CONFIG_RTL8382M_8218B_INTPHY_8218B_8214B_DEMO y
+    bool '  RTL8382M_8218B_INTPHY_8218B_2FIB_1G demo board(24G+2Fiber 1G)' CONFIG_RTL8382M_8218B_INTPHY_8218B_2FIB_1G_DEMO y
+    bool '  RTL8382M_8218D_INTPHY_8218D_2FIB_1G demo board(24G+2Fiber 1G)' CONFIG_RTL8382M_8218D_INTPHY_8218D_2FIB_1G_DEMO y
+    bool '  RTL8381M_INTPHY_8214FC_2FIB_1G demo board(8G+4G Combo+2Fiber 1G)' CONFIG_RTL8381M_INTPHY_8214FC_2FIB_1G_DEMO y
+    bool '  RTL8381M_INTPHY_8214C_2FIB_1G demo board(8G+4G+2Fiber 1G)' CONFIG_RTL8381M_INTPHY_8214C_2FIB_1G_DEMO y
+    bool '  RTL8380M_INTPHY_2FIB_1G demo board(8G+2Fiber 1G)' CONFIG_RTL8380M_INTPHY_2FIB_1G_DEMO y
+    bool '  RTL8332M_8208L_INTPHY_8208L_8214B demo board(24FE+4G Combo)' CONFIG_RTL8332M_8208L_INTPHY_8208L_8214B_DEMO y
+    bool '  RTL8332M_8208L_INTPHY_8208L_8214C demo board(24FE+4G Combo)' CONFIG_RTL8332M_8208L_INTPHY_8208L_8214C_DEMO y
+    bool '  RTL8332M_8208L_INTPHY_8208L_8212B demo board(24FE+2G Combo)' CONFIG_RTL8332M_8208L_INTPHY_8208L_8212B_DEMO y
+    bool '  RTL8330M_INTPHY_8212B demo board(8FE+2G Combo)' CONFIG_RTL8330M_INTPHY_8212B_DEMO y
+    bool '  RTL8330M_INTPHY_2FIB_1G demo board(8FE+2Fiber 1G)' CONFIG_RTL8330M_INTPHY_2FIB_1G_DEMO y
+    bool '  RTL8330M_INTPHY_8212B_SGMII demo board(8FE+2G Combo)' CONFIG_RTL8330M_INTPHY_8212B_SGMII_DEMO y
+				fi
+
+endmenu
+
+#############################################################################
+
+mainmenu_option next_comment
+
+comment 'PHY Probe'
+
+bool 'RTL8208' CONFIG_RTL8208 y
+bool 'RTL8212B' CONFIG_RTL8212B y
+bool 'RTL8212F' CONFIG_RTL8212F y
+bool 'RTL8214' CONFIG_RTL8214 y
+bool 'RTL8214B' CONFIG_RTL8214B y
+bool 'RTL8214F' CONFIG_RTL8214F y
+bool 'RTL8214C' CONFIG_RTL8214C y
+bool 'RTL8214FB' CONFIG_RTL8214FB y
+bool 'RTL8214FC' CONFIG_RTL8214FC y
+bool 'RTL8218' CONFIG_RTL8218 y
+bool 'RTL8218B' CONFIG_RTL8218B y
+bool 'RTL8218D' CONFIG_RTL8218D y
+bool 'RTL8218FB' CONFIG_RTL8218FB y
+bool 'RTL8295R' CONFIG_RTL8295R y
+bool 'RTL8214QF' CONFIG_RTL8214QF y
+
+endmenu
+#############################################################################
+
+mainmenu_option next_comment
+
+comment 'Supported Commands'
+bool 'Command Line Editing' CONFIG_CMDLINE_EDITING y
+bool 'Flash Utilits'  CONFIG_CMD_FLASH y
+bool 'Memory Utilits' CONFIG_CMD_MEMORY y
+bool 'Load from RS-232: BIN Format' CONFIG_CMD_LOADB y
+bool 'Load from RS-232: SREC Format' CONFIG_CMD_LOADS n
+bool 'Show Header Information for Application Image' CONFIG_CMD_IMI n
+if [ "$CONFIG_FLASH_SRAM_ONLY" = "y" -o "$CFG_ENV_IS_IN_FLASH" != "y" ]; then
+	define_bool CONFIG_CMD_ENV n
+else
+	bool 'Save Environment Variables to Flash' CONFIG_CMD_ENV y
+fi
+bool 'Display CP0 Registers' CONFIG_CMD_DUMPREGS n
+
+define_bool CONFIG_CMD_SAVEENV y
+
+comment 'Menu Boot Options'
+bool 'Enable Menu Boot' CONFIG_RTK_BOOT y
+if [ "$CONFIG_RTK_BOOT" = "y" ]; then
+	bool '  Tftp download' CONFIG_TFTP_DOWNLOAD y
+	bool '  Tftp upload' CONFIG_TFTP_UPLOAD y
+	bool '  Serial download' CONFIG_SERIAL_DOWNLOAD n
+	bool '  ICE download' CONFIG_ICE_DOWNLOAD n
+	bool '  Standalone Application' CONFIG_STANDALONE_APP n
+	if [ "$CONFIG_TFTP_DOWNLOAD" = "y" ];then
+		define_bool CONFIG_CMD_NET y
+	fi
+	if [ "$CONFIG_TFTP_UPLOAD" = "y" ];then
+		define_bool CONFIG_CMD_TFTPPUT y
+	fi
+	if [ "$CONFIG_CMD_NET" = "y" ];then
+		define_bool CONFIG_NET_MULTI y
+	fi
+	define_string CONFIG_AUTOBOOT_PROMPT ""
+	define_bool CONFIG_CMD_RTK y
+	define_bool CONFIG_CMD_RUN y
+fi
+
+endmenu
+
+#############################################################################
+
+mainmenu_option next_comment
+comment 'Networking'
+pstring 'MAC Address' CONFIG_ETHADDR "00:E0:4C:86:70:01"
+bool 'Network Command Support' CONFIG_CMD_NET
+if [ "$CONFIG_CMD_NET" = "y" ]; then
+	bool '  Ping' CONFIG_CMD_PING y
+	define_bool CONFIG_NET_MULTI y
+mainmenu_option next_comment
+fi
+pstring 'IP Address' CONFIG_IPADDR 192.168.0.30
+pstring 'IP Mask' CONFIG_NETMASK 255.255.255.0
+pstring 'Gateway' CONFIG_GATEWAYIP 192.168.0.1
+pstring 'TFTP Server IP Address' CONFIG_SERVERIP 192.168.0.111
+
+
+endmenu
+#############################################################################
+
+#############################################################################
+
+mainmenu_option next_comment
+comment 'Miscellaneous'
+if [ "$CONFIG_RTL839XS" = "y" ]; then
+	define_string CFG_PROMPT "RTL8390 # "
+fi
+if [ "$CONFIG_RTL838X" = "y" ]; then
+	define_string CFG_PROMPT "RTL8380 # "
+fi
+
+hex 'U-Boot Text Base' CONFIG_SYS_TEXT_BASE  	0x83F00000
+
+pint 'Boot Delay, -1 to Disable' CONFIG_BOOTDELAY -1
+
+#string 'Booting Arguments' CONFIG_BOOTARGS ""
+
+string 'Boot Command' CONFIG_BOOTCOMMAND ""
+
+string 'Board Version' CONFIG_BOARDVERSION ""
+
+string 'Board Model of Platform' CONFIG_BOARDMODEL ""
+
+string 'Booting Arguments' CONFIG_BOOTARGS ""
+
+string 'Post Password' CONFIG_POSTWORD ""
+
+string 'Boot default file' CONFIG_BOOTFILE ""
+
+pint 'Baudrate' CONFIG_BAUDRATE 115200
+
+string 'config switch name' CONFIG_SWITCH_NAME ""
+
+define_bool CONFIG_$CONFIG_SWITCH_NAME y
+
+endmenu
+
+#############################################################################
+
+mainmenu_option next_comment
+
+comment 'System'
+
+comment 'Flash Configuration'
+choice 'Flash Size' " 4MB CONFIG_FLASH_SIZE_4MB \
+                      8MB CONFIG_FLASH_SIZE_8MB \
+                      16MB CONFIG_FLASH_SIZE_16MB \
+                      32MB CONFIG_FLASH_SIZE_32MB
+                    " 32MB
+
+choice 'Flash Layout Type' " Type1 CONFIG_FLASH_LAYOUT_TYPE1 \
+                             Type2 CONFIG_FLASH_LAYOUT_TYPE2 \
+                             Type3 CONFIG_FLASH_LAYOUT_TYPE3 \
+                             Type4 CONFIG_FLASH_LAYOUT_TYPE4 \
+                             Type5 CONFIG_FLASH_LAYOUT_TYPE5
+                           " Type5
+
+if [ "$CONFIG_FLASH_LAYOUT_TYPE2" = "y"  -o "$CONFIG_FLASH_LAYOUT_TYPE3" = "y" -o "$CONFIG_FLASH_LAYOUT_TYPE4" = "y" -o "$CONFIG_FLASH_LAYOUT_TYPE5" = "y" ]; then
+	define_bool CONFIG_TURNKEY_SYSINFO y
+fi
+
+comment 'System Configuration'
+bool 'System Boot Menu' CONFIG_TURNKEY_ACTION_MENU n
+if [ "$CONFIG_FLASH_SIZE_16MB" = "y" -o "$CONFIG_FLASH_SIZE_32MB" = "y" ]; then
+	bool 'System Dual Image' CONFIG_DUAL_IMAGE y
+	if [ "$CONFIG_DUAL_IMAGE" = "y" ]; then
+		hex 'Partition Size' CONFIG_DUAL_IMAGE_PARTITION_SIZE 0xD30000
+	fi
+fi
+bool 'System Image Loader Check' CONFIG_ENABLE_IH_MAGIC_NUMBER_CHK n
+hex 'Image Magic Number' CONFIG_IH_MAGIC_NUMBER 0x12345000
+bool 'ENV CRC ERROR, save default ENV' CONFIG_ENV_CRC_ERROR_SAVE_DEFAULT_ENV n
+
+endmenu
+#############################################################################
+
+if [ "$CONFIG_RTL838XS" = "y" ]; then
+	define_int  CONFIG_CONS_INDEX 1
+	define_bool CONFIG_SERIAL_SOFTWARE_FIFO n
+	define_int  CONFIG_SYS_SDRAM_BASE 0x80000000
+	define_string CONFIG_MTD_PARTITIONS "n"
+        define_bool CONFIG_RTL8380 y
+        define_bool CONFIG_ENV_OVERWRITE y
+        define_int  CONFIG_EXCEPTION_BASE 0xbf000000
+fi
+if [ "$CONFIG_RTL839XS" = "y" ]; then
+        define_int  CONFIG_CONS_INDEX 1
+        define_bool CONFIG_SERIAL_SOFTWARE_FIFO n
+	define_int  CONFIG_SYS_SDRAM_BASE 0x80000000
+	define_string CONFIG_MTD_PARTITIONS "n"
+        define_bool CONFIG_RTL8390 y
+        define_bool CONFIG_ENV_OVERWRITE y
+        define_int  CONFIG_EXCEPTION_BASE 0xbf000000
+fi
+if [ "$CONFIG_RTL838X" = "y" ] || [ "$CONFIG_RTL838XS" = "y" ]; then
+	source ./board/Realtek/rtl838x/menuconfig.in
+elif [ "$CONFIG_RTL839X" = "y" ] || [ "$CONFIG_RTL839XS" = "y" ]; then
+	source ./board/Realtek/rtl839x/menuconfig.in
+fi
+
+if [ "$CONFIG_RTL8218B" = "y" ]; then
+  bool "Improve RTL8218B ESD capability" CONFIG_RTL8218B_HW_ESD_IMPROVEMENT n
+fi
