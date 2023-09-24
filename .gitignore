@@ -16,6 +16,8 @@
 *.patch
 *.bin
 *.log
+*.config
+*.old
 
 # Build tree
 /build-*
@@ -85,3 +87,13 @@ cscope.*
 MCradiolists
 MCmenu
 MCdialog.out
+.config_ready
+arch/otto/include/asm/arch
+include/asm
+include/autoconf.mk
+include/autoconf.mk.dep
+include/config.h
+include/config.mk
+include/configs/autoconf.h
+post
+
