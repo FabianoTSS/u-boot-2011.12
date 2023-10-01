@@ -42,7 +42,7 @@
 #include <spi_flash.h>
 #include <search.h>
 #include <errno.h>
-#include <rtk_flash_common.h>
+#include <configs/rtk_flash_common.h>
 #include <turnkey/sysinfo.h>
 
 /************************************************************************

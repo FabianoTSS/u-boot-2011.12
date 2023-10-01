@@ -5,7 +5,7 @@
 	#include <preloader.h>
 #endif
 
-#include <plr_pll_gen3.h>
+#include "../../include/plr_pll_gen3.h"
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,5 +1,5 @@
 #include <preloader.h>
-#include <mips-generic.h>
+#include "mips-generic.h"
 #include <configs/autoconf.h>
 
  .section preloader.uc, "ax", @progbits

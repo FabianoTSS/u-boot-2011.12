@@ -644,7 +644,7 @@ menuconfig: clobber unconfig
 	@HELP_FILE=config/Configure.help \
 		AUTOCONF_FILE=autoconf.h \
 		$(SHELL) $(SCRIPTSDIR)/Menuconfig config.in
-	ln -snf $(SDKSYSDIR)/include/linux/mtd/rtk_flash_common.h $(SRCTREE)/board/Realtek/include/rtk_flash_common.h
+	ln -snf $(SDKSYSDIR)/include/configs/rtk_flash_common.h $(SRCTREE)/board/Realtek/include/rtk_flash_common.h
 	@if egrep "^CONFIG_RTL838X=y" .config > /dev/null; then \
 		mv $(SRCTREE)/autoconf.h $(SRCTREE)/include/configs/ ; \
 		make rtl838x_config ARCH=otto ; \
@@ -940,7 +940,7 @@ rest_config:
 		$(MAKE) -C arch/mips/cpu/mips4kec/rtl838x preloader ; \
 		$(MAKE) -C ./arch/mips/lib plr_flash.c ; \
 	fi
-	@ln -snf $(SDKSYSDIR)/include/linux/mtd/rtk_flash_common.h $(SRCTREE)/board/Realtek/include/rtk_flash_common.h
+	@ln -snf $(SDKSYSDIR)/include/configs/rtk_flash_common.h $(SRCTREE)/board/Realtek/include/rtk_flash_common.h
 	@ln -snf $(SRCTREE)/post_mips post
 	@touch $(CONFIG_READY)
 

@@ -1,6 +1,6 @@
 #include <preloader.h>
-#include <cpu_utils.h>
-#include <plr_pll_gen3.h>
+#include "cpu/cpu_utils.h"
+#include "../../include/plr_pll_gen3.h"
 
 void pll_setup(void) {
     printf("\rII: PLL... ");

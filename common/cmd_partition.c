@@ -28,7 +28,7 @@
 #include <spi_flash.h>
 
 #include <image.h>
-#include <rtk_flash_common.h>
+#include <configs/rtk_flash_common.h>
 #include <turnkey/sysinfo.h>
 
 #ifndef CONFIG_ENV_SPI_BUS

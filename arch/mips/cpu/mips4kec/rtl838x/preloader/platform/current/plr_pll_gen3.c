@@ -1,5 +1,5 @@
 #include <preloader.h>
-#include <plr_pll_gen3.h>
+#include "../../include/plr_pll_gen3.h"
 
 /* From soc.h, PLL_DEV_CPU == 0, PLL_DEV_LX == 1,
    PLL_DEV_MEM == 2, and PLL_DEV_DSP == 3 */

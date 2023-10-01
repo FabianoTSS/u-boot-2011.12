@@ -1,18 +1,18 @@
 #include <preloader.h>
 #include <soc.h>
 #include <pblr.h>
-#include <plr_spare.h>
+#include "preloader/include/plr_spare.h"
 
 #if (OTTO_PLL_GEN == 1)
-	#include <plr_pll_gen1.h>
+	#include "preloader/platform/current/plr_pll_gen1.h"
 	#define pll_set_from_mhz pll_gen1_set_from_mhz
 	typedef pll_gen1_mhz_t   pll_mhz_t;
 #elif (OTTO_PLL_GEN == 2)
-	#include <plr_pll_gen2.h>
+	#include "preloader/platform/current/plr_pll_gen2.h"
 	#define pll_set_from_mhz pll_gen2_set_from_mhz
 	typedef pll_gen2_mhz_t   pll_mhz_t;
 #elif (OTTO_PLL_GEN == 3)
-	#include <plr_pll_gen3.h>
+	#include "preloader/include/plr_pll_gen3.h"
 	#define pll_set_from_mhz pll_gen3_set_from_mhz
 	typedef pll_gen3_mhz_t   pll_mhz_t;
 #else

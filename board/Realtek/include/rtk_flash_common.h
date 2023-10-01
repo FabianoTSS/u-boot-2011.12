@@ -1,1 +1,1 @@
-/system/linux/linux-2.6.32.x/include/linux/mtd/rtk_flash_common.h
+/system/linux/linux-2.6.32.x/include/configs/rtk_flash_common.h

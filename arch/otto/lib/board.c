@@ -40,7 +40,7 @@
 #if defined(CONFIG_POST)
 #include <post.h>
 #endif
-#include "rtk_flash_common.h"
+#include <configs/rtk_flash_common.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 

@@ -5,7 +5,7 @@
  #include <preloader.h>
 #include <soc.h>
 #include <pblr.h>
-#include "memctl.h"
+#include "include/memctl.h"
 #define _cache_flush	pblr_dc_flushall
 #include "config.h"
 

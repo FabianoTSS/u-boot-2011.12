@@ -2,7 +2,7 @@
 #include <soc.h>
 #include "bspchip.h"
 #include "dram/plr_dram_gen2_memctl.h"
-#include <plr_pll_gen3.h>
+#include "../../include/plr_pll_gen3.h"
 
 /*
  * Function declaration

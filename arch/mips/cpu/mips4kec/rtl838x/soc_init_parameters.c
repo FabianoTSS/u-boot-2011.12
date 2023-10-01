@@ -1,6 +1,6 @@
 #include <soc.h>
 #include <config.h>
-#include <plr_pll_gen3.h>
+#include "preloader/include/plr_pll_gen3.h"
 
 pll_gen3_mhz_t pll_mhz = {
 	.mode = PLL_MODE_BY_SW,
@@ -11,19 +11,19 @@ pll_gen3_mhz_t pll_mhz = {
 
 const dram_info_t dram_info_in_spare[SOC_NUM_DRAM_SPARE] = {
 	{
-		#include <DRAM_GEN2_NANYA_NT5TU128M8GE-AC_838x_DEMO_300MHZ.h>
+		#include "../../../../../model_info/DRAM_GEN2_NANYA_NT5TU128M8GE-AC_838x_DEMO_300MHZ.h"
 	}, {
-		#include <DRAM_GEN2_NANYA_NT5TU128M8GE-AC_ZQ-STATIC_838x_DEMO_300MHZ.h>
+		#include "../../../../../model_info/DRAM_GEN2_NANYA_NT5TU128M8GE-AC_ZQ-STATIC_838x_DEMO_300MHZ.h"
 	}
 };
 
 const plr_flash_info_t flash_info_in_spare[SOC_NUM_FLASH_SPARE] = {
 	{
-		#include <NOR_SPI_F_WINBOND_W25Q256FV_DIO.h>
+		#include "../../../../../model_info/NOR_SPI_F_WINBOND_W25Q256FV_DIO.h"
 	}, {
-		#include <NOR_SPI_F_GD_GD25Q256C_32MB_DIO.h>
+		#include "../../../../../model_info/NOR_SPI_F_GD_GD25Q256C_32MB_DIO.h"
 	}, {
-		#include <NOR_SPI_F_MICRON_MT25QL256AB.h>
+		#include "../../../../../model_info/NOR_SPI_F_MICRON_MT25QL256AB.h"
 	}
 };
 
@@ -57,7 +57,7 @@ const soc_t soc_in_flash = {
 	.spare_headers = (spare_header_p)spare_headers_in_flash,
 
 	.flash_info = {
-		#include <NOR_SPI_F_MXIC_MX25L12835F_DIO.h>
+		#include "../../../../../model_info/NOR_SPI_F_MXIC_MX25L12835F_DIO.h"
 	},
 
 	.layout = {
@@ -79,10 +79,10 @@ const soc_t soc_in_flash = {
 	.dram_info = {
 	#ifndef CONFIG_CUSTOMER_BOARD
 		/* Realtek's default parameters of DRAM. */
-		#include <DRAM_GEN2_SAMSUNG_K4B1G0846G_838x_DEMO_300MHZ.h>
+		#include "../../../../../model_info/DRAM_GEN2_SAMSUNG_K4B1G0846G_838x_DEMO_300MHZ.h"
 	#else
 		/* Customer's parameters of DRAM. */
-		#include <DRAM_CUSTOM_MODEL.h>
+		#include "../../../../../model_info/DRAM_CUSTOM_MODEL.h"
 	#endif
 	},
 

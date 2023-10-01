@@ -25,7 +25,7 @@
 #ifndef __UBOOT__
 #define __UBOOT__
 #endif
-#include "rtk_flash_common.h"
+#include <configs/rtk_flash_common.h>
 
 #define CONFIG_SYS_HZ     (board_LX_freq_mhz() * 1000 * 1000)
 

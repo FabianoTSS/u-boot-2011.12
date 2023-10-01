@@ -1,5 +1,5 @@
 #include <preloader.h>
-#include <mips-generic.h>
+#include "../../../platform/current/cpu/mips-generic.h"
 
 GFUNC(cpu_init)
 /* Backup return address */

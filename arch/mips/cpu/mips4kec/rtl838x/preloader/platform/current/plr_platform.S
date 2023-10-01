@@ -1,6 +1,6 @@
-#include "mips-generic.h"
-#include "addrspace.h"
-#include "cacheops.h"
+#include "cpu/mips-generic.h"
+#include "cpu/addrspace.h"
+#include "cpu/cacheops.h"
 
 //#include "regdef.h"
 //#include "mipsregs.h"

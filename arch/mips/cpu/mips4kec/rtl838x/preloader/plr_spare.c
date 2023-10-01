@@ -2,7 +2,7 @@
 #ifdef __LUNA_KERNEL__
 #include <kernel_soc.h>
 #else
-#include <plr_spare.h>
+#include "include/plr_spare.h"
 #endif
 
 #ifdef USE_SOC_SPARE

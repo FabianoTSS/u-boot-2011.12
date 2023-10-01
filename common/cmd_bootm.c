@@ -38,7 +38,7 @@
 #include <asm/byteorder.h>
 #include <linux/compiler.h>
 
-#include <rtk_flash_common.h>
+#include <configs/rtk_flash_common.h>
 #include <turnkey/sysinfo.h>
 
 #if defined(CONFIG_CMD_USB)

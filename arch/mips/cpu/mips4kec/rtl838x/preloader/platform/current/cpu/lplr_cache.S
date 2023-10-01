@@ -1,4 +1,4 @@
-#include <mips-generic.h>
+#include "../../../platform/current/cpu/mips-generic.h"
 #include <soc.h>
 
 #define	RA		t8
