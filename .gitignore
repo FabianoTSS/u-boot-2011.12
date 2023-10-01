@@ -102,6 +102,7 @@ tools/envcrc
 tools/img2srec
 tools/mkenvimage
 tools/mkimage
+tools/gen_eth_addr
 arch/mips/cpu/mips4kec/rtl838x/include
 post
 
