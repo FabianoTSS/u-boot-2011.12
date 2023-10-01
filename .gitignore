@@ -95,5 +95,12 @@ include/autoconf.mk.dep
 include/config.h
 include/config.mk
 include/configs/autoconf.h
+tools/mkloaderinfo
+.otto.E
+.otto.mk
+tools/envcrc
+tools/img2srec
+tools/mkenvimage
+tools/mkimage
 post
 
